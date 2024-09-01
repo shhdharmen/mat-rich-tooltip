@@ -1,0 +1,123 @@
+@use "@angular/material" as mat;
+
+.rich-tooltip {
+  position: relative;
+  transform: scale(0);
+
+  &-transient {
+    // Increases the area of the tooltip so the user's pointer can go from the trigger directly to it.
+    &::before {
+      --offset-y: var(--rich-tooltip-offset-y, -8px);
+      --offset-x: var(--rich-tooltip-offset-x, -8px);
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      position: absolute;
+    }
+  }
+
+  // Only set the offset on the side closest to the panel so we
+  // don't accidentally cover more content than we need to.
+  &-below::before {
+    top: var(--offset-y);
+  }
+
+  &-above::before {
+    bottom: var(--offset-y);
+  }
+
+  &-after::before {
+    left: var(--offset-x);
+  }
+
+  &-before::before {
+    right: var(--offset-x);
+  }
+
+  &._mat-animation-noopable {
+    animation: none;
+    transform: scale(1);
+  }
+
+  &-surface {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--sys-surface-container);
+    color: var(--sys-on-surface-variant);
+    border-radius: var(--mdc-elevated-card-container-shape);
+    @include mat.elevation(2);
+    min-width: 40px;
+    max-width: 312px;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-bottom: 8px;
+    gap: 8px;
+
+    text-align: left;
+
+    [dir="rtl"] & {
+      text-align: right;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px 4px 16px;
+  }
+
+  &-subhead {
+    font: var(--sys-title-small);
+    letter-spacing: var(--sys-title-small-tracking);
+  }
+
+  &-supporting-text {
+    font: var(--sys-body-medium);
+    letter-spacing: var(--sys-body-medium-tracking);
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 8px;
+    gap: 8px;
+  }
+}
+
+@keyframes mat-mdc-tooltip-show {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mat-mdc-tooltip-hide {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.mat-mdc-tooltip-show {
+  animation: mat-mdc-tooltip-show 150ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.mat-mdc-tooltip-hide {
+  animation: mat-mdc-tooltip-hide 75ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}

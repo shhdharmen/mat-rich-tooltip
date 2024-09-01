@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mat-rich-tooltip": {
+    "mat-rich-tooltip-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mat-rich-tooltip",
+            "outputPath": "dist/mat-rich-tooltip-demo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mat-rich-tooltip:build:production"
+              "buildTarget": "mat-rich-tooltip-demo:build:production"
             },
             "development": {
-              "buildTarget": "mat-rich-tooltip:build:development"
+              "buildTarget": "mat-rich-tooltip-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,6 +94,39 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "mat-rich-tooltip": {
+      "projectType": "library",
+      "root": "projects/mat-rich-tooltip",
+      "sourceRoot": "projects/mat-rich-tooltip/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/mat-rich-tooltip/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mat-rich-tooltip/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/mat-rich-tooltip/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/mat-rich-tooltip/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

@@ -9,6 +9,11 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "mat-rich-tooltip": [
+        "./dist/mat-rich-tooltip"
+      ]
+    },
     "skipLibCheck": true,
     "isolatedModules": true,
     "esModuleInterop": true,

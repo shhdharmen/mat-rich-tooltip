@@ -1,0 +1,28 @@
+@if (_trigger) {
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="_trigger"
+  [cdkConnectedOverlayOpen]="true"
+  (overlayOutsideClick)="hide(0)"
+  [cdkConnectedOverlayTransformOriginOn]="'.rich-tooltip'"
+  [cdkConnectedOverlayViewportMargin]="8"
+  [cdkConnectedOverlayPositions]="positions"
+  (positionChange)="_handlePositionChange($event)"
+>
+  <!-- tabindex="-1" is needed so that it can receive focus -->
+  <div
+    tabindex="-1"
+    [id]="panelId"
+    class="rich-tooltip"
+    [ngClass]="tooltipClassList"
+    (animationend)="_handleAnimationEnd($event)"
+    (mouseleave)="_handleMouseLeave($event)"
+    [style.--rich-tooltip-offset-x]="-_trigger.offsetWidth + 'px'"
+    [style.--rich-tooltip-offset-y]="-0 + 'px'"
+  >
+    <div class="rich-tooltip-surface">
+      <ng-template [cdkPortalOutlet]="selectedPortal()"></ng-template>
+    </div>
+  </div>
+</ng-template>
+}
