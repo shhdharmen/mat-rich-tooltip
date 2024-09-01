@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MenuPositionX, MenuPositionY } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import {
   RichTooltipDirective,
   RickTooltipContentComponent,
@@ -18,7 +19,7 @@ import {
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styles: `:host { display: block; margin: 16px; } .demo-container { padding: 156px 312px }`,
+  styles: `:host { display: block; margin: 16px; } .demo-container { padding: 16px; display: flex; align-items: center; justify-content: center; }`,
   imports: [
     MatIconModule,
     MatButtonModule,
@@ -29,7 +30,8 @@ import {
     RickTooltipActionsComponent,
     FormsModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
 ],
 })
 export class AppComponent {

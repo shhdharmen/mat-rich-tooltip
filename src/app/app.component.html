@@ -1,27 +1,36 @@
-<div class="demo-container">
-  <button
-    mat-raised-button
-    class="align-middle"
-    [matRichTooltip]="richTooltipTemplate"
-    matRichTooltipBehavior="persistent"
-    [matRichTooltipDisabled]="disabled"
-    [matRichTooltipXPosition]="xPosition"
-    [matRichTooltipYPosition]="yPosition"
-    #tooltip="matRichTooltip"
-  >
-    <mat-icon>info</mat-icon> Show Persistent Rich Tooltip
-  </button>
-  <button
-    mat-raised-button
-    class="align-middle"
-    [matRichTooltip]="richTooltipTemplate"
-    [matRichTooltipDisabled]="disabled"
-    [matRichTooltipXPosition]="xPosition"
-    [matRichTooltipYPosition]="yPosition"
-  >
-    <mat-icon>info</mat-icon> Show Transient Rich Tooltip
-  </button>
-</div>
+<mat-tab-group>
+  <mat-tab label="Persistent">
+    <div class="demo-container">
+      <button
+        mat-raised-button
+        class="align-middle"
+        [matRichTooltip]="richTooltipTemplate"
+        matRichTooltipBehavior="persistent"
+        [matRichTooltipDisabled]="disabled"
+        [matRichTooltipXPosition]="xPosition"
+        [matRichTooltipYPosition]="yPosition"
+        #tooltip="matRichTooltip"
+      >
+        <mat-icon>info</mat-icon> Show Persistent Rich Tooltip
+      </button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Transient">
+    <div class="demo-container">
+      <button
+        mat-raised-button
+        class="align-middle"
+        [matRichTooltip]="richTooltipTemplate"
+        [matRichTooltipDisabled]="disabled"
+        [matRichTooltipXPosition]="xPosition"
+        [matRichTooltipYPosition]="yPosition"
+      >
+        <mat-icon>info</mat-icon> Show Transient Rich Tooltip
+      </button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
 <ng-template #richTooltipTemplate>
   <mat-rich-tooltip-content>
     <mat-rich-tooltip-subhead> Rich tooltip </mat-rich-tooltip-subhead>
