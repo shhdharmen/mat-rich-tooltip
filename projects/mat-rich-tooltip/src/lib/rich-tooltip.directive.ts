@@ -53,7 +53,8 @@ const passiveListenerOptions = normalizePassiveListenerOptions({
   host: {
     '[attr.aria-haspopup]': '_richTooltipInstance ? "true" : null',
     '[attr.aria-expanded]': '_isTooltipVisible()',
-    '[attr.aria-controls]': '_isTooltipVisible() ? _richTooltipInstance.panelId : null',
+    '[attr.aria-controls]':
+      '_isTooltipVisible() ? _richTooltipInstance.panelId : null',
   },
 })
 export class RichTooltipDirective implements OnDestroy, AfterViewInit {
@@ -285,6 +286,7 @@ export class RichTooltipDirective implements OnDestroy, AfterViewInit {
             if (this._isTooltipVisible()) {
               this.hide();
             } else {
+              this._setupPointerExitEventsIfNeeded();
               this.show();
             }
           },
@@ -328,8 +330,8 @@ export class RichTooltipDirective implements OnDestroy, AfterViewInit {
       EventListenerOrEventListenerObject
     ])[] = [];
     if (this._platformSupportsMouseEvents()) {
-      exitListeners.push(
-        [
+      if (this.behavior() === 'transient') {
+        exitListeners.push([
           'mouseleave',
           (event) => {
             const newTarget = (event as MouseEvent)
@@ -343,7 +345,9 @@ export class RichTooltipDirective implements OnDestroy, AfterViewInit {
               this.hide();
             }
           },
-        ],
+        ]);
+      }
+      exitListeners.push(
         [
           'blur',
           (event) => {
